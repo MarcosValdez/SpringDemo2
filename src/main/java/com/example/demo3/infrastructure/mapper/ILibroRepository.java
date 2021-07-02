@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface ILibroRepository {
 
-    @Select(value = "SELECT * FROM spl_libro()")
+    @Select(value = "SELECT * FROM libro")
     @Results(id = "libros", value = {
             @Result(property = "libroId", column = "libro_id"),
             @Result(property = "autorId", column = "autor_id"),
