@@ -13,19 +13,22 @@ public class LibroJPA {
     @Column(name = "libro_id")
     private Integer libroId;
 
-    @Column(name = "autor_id")
-    private Integer autor;
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    private AutorJPA autor;
 
-    @Column(name = "categoria_id")
-    private String categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaJPA categoria;
 
-    @Column(name = "editorial_id")
-    private String editorial;
+    @ManyToOne
+    @JoinColumn(name = "editorial_id")
+    private EditorialJPA editorial;
 
     @Column(name = "nombre")
     private String nombre;
 
-    /*@Column(name = "descripcion")
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "paginas")
@@ -36,33 +39,33 @@ public class LibroJPA {
 
     public Integer getLibroId() {
         return libroId;
-    }*/
+    }
 
     public void setLibroId(Integer libroId) {
         this.libroId = libroId;
     }
 
-    public Integer getAutor() {
+    public AutorJPA getAutor() {
         return autor;
     }
 
-    public void setAutor(Integer autor) {
+    public void setAutor(AutorJPA autor) {
         this.autor = autor;
     }
 
-    public String getCategoria() {
+    public CategoriaJPA getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaJPA categoria) {
         this.categoria = categoria;
     }
 
-    public String getEditorial() {
+    public EditorialJPA getEditorial() {
         return editorial;
     }
 
-    public void setEditorial(String editorial) {
+    public void setEditorial(EditorialJPA editorial) {
         this.editorial = editorial;
     }
 
@@ -74,7 +77,7 @@ public class LibroJPA {
         this.nombre = nombre;
     }
 
-   /* public String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -96,5 +99,5 @@ public class LibroJPA {
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
-    }*/
+    }
 }

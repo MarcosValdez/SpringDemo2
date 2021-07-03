@@ -16,8 +16,23 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
     @Override
     public List<LibroJPA> list() {
-        List<LibroJPA> prueba = (List<LibroJPA>) libroRepository.findAll();
-        System.out.println(prueba.get(0));
         return (List<LibroJPA>) libroRepository.findAll();
+    }
+
+    @Override
+    public LibroJPA getById(Integer id) {
+        return libroRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public LibroJPA save(LibroJPA libro) {
+        return libroRepository.save(libro);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        LibroJPA libro =  new LibroJPA();
+        libro.setLibroId(id);
+        libroRepository.delete(libro);
     }
 }
