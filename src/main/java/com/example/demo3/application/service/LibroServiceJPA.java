@@ -2,7 +2,11 @@ package com.example.demo3.application.service;
 
 import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.DTO.ReporteDTO;
+import com.example.demo3.application.entity.AutorJPA;
+import com.example.demo3.application.entity.CategoriaJPA;
 import com.example.demo3.application.entity.LibroJPA;
+import com.example.demo3.application.inteface.IAutorServiceJPA;
+import com.example.demo3.application.inteface.ICategoriaServiceJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ExcelUtil;
 import com.example.demo3.infrastructure.mapper.LibroRepository;
@@ -14,6 +18,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service("libroServiceJPA")
@@ -24,6 +31,12 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
     @Autowired
     ReporteRepository reporteRepository;
+
+    @Autowired
+    IAutorServiceJPA autorServiceJPA;
+
+    @Autowired
+    ICategoriaServiceJPA categoriaServiceJPA;
 
     @Override
     public List<LibroJPA> list() {
@@ -37,6 +50,11 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
     @Override
     public LibroJPA save(LibroJPA libro) {
+        CategoriaJPA categoriaJPA = categoriaServiceJPA.save(libro.getCategoria());
+        AutorJPA autor = autorServiceJPA.save(libro.getAutor());
+        libro.setCategoria(categoriaJPA);
+        libro.setAutor(autor);
+        libro.setFecha(LocalDateTime.now());
         return libroRepository.save(libro);
     }
 

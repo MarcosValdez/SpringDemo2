@@ -1,6 +1,7 @@
 package com.example.demo3.controller;
 
 import com.example.demo3.application.DTO.ParametrosDTO;
+import com.example.demo3.application.DTO.ReporteDTO;
 import com.example.demo3.application.entity.LibroJPA;
 import com.example.demo3.application.entity.VentaJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
@@ -37,7 +38,7 @@ public class LibroControllerJPA {
     }
 
     @PostMapping("/listar")
-    public ResponseEntity<List<LibroJPA>> listar(@RequestBody ParametrosDTO parametrosDTO) {
+    public ResponseEntity<List<ReporteDTO>> listar(@RequestBody ParametrosDTO parametrosDTO) {
         try {
 
             return new ResponseEntity(libroServiceJPA.listar(parametrosDTO), HttpStatus.OK);
