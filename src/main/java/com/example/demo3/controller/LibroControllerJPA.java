@@ -25,7 +25,7 @@ public class LibroControllerJPA {
     ILibroServiceJPA libroServiceJPA;
 
     @GetMapping("/list")
-    public ResponseEntity<List<LibroJPA>> list() {
+    public ResponseEntity<ServiceResult> list() {
         ServiceResult serviceResult = new ServiceResult();
         try {
 
