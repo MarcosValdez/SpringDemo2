@@ -2,6 +2,7 @@ package com.example.demo3.controller;
 
 import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.entity.LibroJPA;
+import com.example.demo3.application.entity.VentaJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ServiceResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/librojpa")
 public class LibroControllerJPA {
@@ -25,18 +26,14 @@ public class LibroControllerJPA {
     ILibroServiceJPA libroServiceJPA;
 
     @GetMapping("/list")
-    public String list() {
-        /*ServiceResult serviceResult = new ServiceResult();
+    public ResponseEntity<List<LibroJPA>> list() {
         try {
 
-            serviceResult.setData(libroServiceJPA.list());
-            serviceResult.setMessage("success");
-
-            return new ResponseEntity(serviceResult, HttpStatus.OK);
+            return new ResponseEntity(libroServiceJPA.list(), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }*/
-        return "exito";
+        }
+
     }
 
     @GetMapping("/list/{id}")
