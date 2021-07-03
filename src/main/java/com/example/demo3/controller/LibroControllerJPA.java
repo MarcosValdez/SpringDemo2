@@ -36,6 +36,17 @@ public class LibroControllerJPA {
 
     }
 
+    @PostMapping("/list")
+    public ResponseEntity<List<LibroJPA>> listar(@RequestBody ParametrosDTO parametrosDTO) {
+        try {
+
+            return new ResponseEntity(libroServiceJPA.listar(parametrosDTO), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @GetMapping("/list/{id}")
     public ResponseEntity<List<LibroJPA>> listById(@PathVariable Integer id) {
         try {
