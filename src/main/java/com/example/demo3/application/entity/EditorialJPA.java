@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class EditorialJPA {
 
     @Id
-    @SequenceGenerator(name = "editorial_id_seq", sequenceName = "editorial_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "editorial_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "editorial_id")
     private Integer editorialId;
 

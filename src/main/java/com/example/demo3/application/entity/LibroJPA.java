@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 public class LibroJPA {
 
     @Id
-    @SequenceGenerator(name = "libro_id_seq", sequenceName = "libro_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "libro_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "libro_id")
     private Integer libroId;
 

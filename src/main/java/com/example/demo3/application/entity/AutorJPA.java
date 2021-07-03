@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class AutorJPA {
 
     @Id
-    @SequenceGenerator(name = "autor_id_seq", sequenceName = "autor_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "autor_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "autor_id")
     private Integer autorId;
 

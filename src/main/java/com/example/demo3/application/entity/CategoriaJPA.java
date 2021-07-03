@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class CategoriaJPA {
 
     @Id
-    @SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "categoria_id")
     private Integer categoriaId;
 

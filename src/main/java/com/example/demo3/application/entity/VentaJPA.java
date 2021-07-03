@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 public class VentaJPA {
 
     @Id
-    @SequenceGenerator(name = "venta_id_seq", sequenceName = "venta_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venta_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "venta_id")
     private Integer ventaId;
 

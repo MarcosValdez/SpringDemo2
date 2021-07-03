@@ -16,7 +16,7 @@ public class AutorServiceJPA implements IAutorServiceJPA {
 
     @Override
     public List<AutorJPA> list() {
-        return null;
+        return (List<AutorJPA>) autorRepository.findAll();
     }
 
     @Override
