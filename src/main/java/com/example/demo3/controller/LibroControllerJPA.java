@@ -106,4 +106,15 @@ public class LibroControllerJPA {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    @GetMapping("/vender/{id}")
+    public ResponseEntity<Void> vender(@PathVariable Integer id) {
+        try {
+            libroServiceJPA.vender(id);
+            return new ResponseEntity(null, HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -4,9 +4,11 @@ import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.DTO.ReporteDTO;
 import com.example.demo3.application.entity.AutorJPA;
 import com.example.demo3.application.entity.CategoriaJPA;
+import com.example.demo3.application.entity.EditorialJPA;
 import com.example.demo3.application.entity.LibroJPA;
 import com.example.demo3.application.inteface.IAutorServiceJPA;
 import com.example.demo3.application.inteface.ICategoriaServiceJPA;
+import com.example.demo3.application.inteface.IEditorialServiceJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ExcelUtil;
 import com.example.demo3.infrastructure.mapper.LibroRepository;
@@ -36,7 +38,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
     IAutorServiceJPA autorServiceJPA;
 
     @Autowired
-    ICategoriaServiceJPA categoriaServiceJPA;
+    IEditorialServiceJPA editorialServiceJPA;
 
     @Override
     public List<LibroJPA> list() {
@@ -51,7 +53,9 @@ public class LibroServiceJPA implements ILibroServiceJPA {
     @Override
     public LibroJPA save(LibroJPA libro) {
         AutorJPA autor = autorServiceJPA.save(libro.getAutor());
+        EditorialJPA editorial = editorialServiceJPA.save(libro.getEditorial());
         libro.setAutor(autor);
+        libro.setEditorial(editorial);
         libro.setFecha(LocalDateTime.now());
         return libroRepository.save(libro);
     }
@@ -118,5 +122,10 @@ public class LibroServiceJPA implements ILibroServiceJPA {
     public List<ReporteDTO> listar(ParametrosDTO parametrosDTO) {
 
         return reporteRepository.listar(parametrosDTO);
+    }
+
+    @Override
+    public void vender(Integer id) {
+        libroRepository.vender(id);
     }
 }

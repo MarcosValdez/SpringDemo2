@@ -52,7 +52,7 @@ public class ReporteRepository {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("c.nombre = " + caso.getCategoria());
+            sql.append("c.categoria_id = " + caso.getCategoria());
         }
 
         if (caso.getFechaInicio() != null && caso.getFechaFin() != null) {

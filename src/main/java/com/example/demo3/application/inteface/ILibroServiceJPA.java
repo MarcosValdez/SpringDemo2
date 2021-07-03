@@ -14,4 +14,5 @@ public interface ILibroServiceJPA {
     void delete(Integer id);
     ByteArrayInputStream exportExcel(ParametrosDTO parametrosDTO) throws Exception;
     List<ReporteDTO> listar(ParametrosDTO parametrosDTO);
+    void vender(Integer id);
 }
