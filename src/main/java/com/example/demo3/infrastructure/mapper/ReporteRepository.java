@@ -82,7 +82,9 @@ public class ReporteRepository {
             t.setCategoria(rs.getString("categoria"));
             t.setEditorial(rs.getString("editorial"));
             t.setPaginas(rs.getString("paginas"));
-            t.setFecha(rs.getDate("fecha").toLocalDate());
+            if(rs.getDate("fecha") != null){
+                t.setFecha(rs.getDate("fecha").toLocalDate());
+            }
             t.setDescripcion(rs.getString("descripcion"));
 
             return t;

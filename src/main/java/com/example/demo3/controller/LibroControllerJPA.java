@@ -36,7 +36,7 @@ public class LibroControllerJPA {
 
     }
 
-    @PostMapping("/list")
+    @PostMapping("/listar")
     public ResponseEntity<List<LibroJPA>> listar(@RequestBody ParametrosDTO parametrosDTO) {
         try {
 
