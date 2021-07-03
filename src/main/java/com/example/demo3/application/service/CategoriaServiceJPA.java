@@ -11,10 +11,27 @@ import java.util.List;
 @Service("categoriaServiceJPA")
 public class CategoriaServiceJPA implements ICategoriaServiceJPA {
     @Autowired
-    LibroRepository libroRepository;
+    CategoriaRepository categoriaRepository;
 
     @Override
     public List<CategoriaJPA> list() {
-        return null;
+        return (List<CategoriaJPA>) categoriaRepository.findAll();
+    }
+
+    @Override
+    public CategoriaJPA getById(Integer id) {
+        return categoriaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public CategoriaJPA save(CategoriaJPA categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        CategoriaJPA categoria =  new CategoriaJPA();
+        categoria.setCategoriaId(id);
+        categoriaRepository.delete(categoria);
     }
 }

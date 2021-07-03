@@ -20,7 +20,19 @@ public class AutorServiceJPA implements IAutorServiceJPA {
     }
 
     @Override
+    public AutorJPA getById(Integer id) {
+        return autorRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public AutorJPA save(AutorJPA autor) {
         return autorRepository.save(autor);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        AutorJPA autor =  new AutorJPA();
+        autor.setAutorId(id);
+        autorRepository.delete(autor);
     }
 }
