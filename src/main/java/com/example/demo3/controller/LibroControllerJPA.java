@@ -1,14 +1,19 @@
 package com.example.demo3.controller;
 
+import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.entity.LibroJPA;
-import com.example.demo3.application.service.LibroServiceJPA;
+import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ServiceResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @CrossOrigin
@@ -17,7 +22,7 @@ import java.util.List;
 public class LibroControllerJPA {
 
     @Autowired
-    LibroServiceJPA libroServiceJPA;
+    ILibroServiceJPA libroServiceJPA;
 
     @GetMapping("/list")
     public ResponseEntity<List<LibroJPA>> list() {
@@ -71,6 +76,18 @@ public class LibroControllerJPA {
             serviceResult.setError(ex.getMessage());
             serviceResult.setSuccess(false);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/export")
+    public ResponseEntity<InputStreamSource> exportarExcel(@RequestBody ParametrosDTO parametrosDTO) {
+        try {
+            ByteArrayInputStream stream = libroServiceJPA.exportExcel(parametrosDTO);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Libros.xls");
+            return ResponseEntity.ok().headers(headers).body(new InputStreamResource(stream));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

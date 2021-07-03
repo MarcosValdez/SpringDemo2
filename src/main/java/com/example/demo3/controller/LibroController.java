@@ -4,12 +4,16 @@ import com.example.demo3.application.DTO.LibroDTO;
 import com.example.demo3.application.inteface.ILibroService;
 import com.example.demo3.infrastructure.common.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @RestController
@@ -43,5 +47,6 @@ public class LibroController {
         }
         return new ResponseEntity<>(serviceResult, HttpStatus.OK);
     }
+
 
 }
