@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/api/v1/libro")
 public class LibroControllerJPA {
