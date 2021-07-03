@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/librojpa")
 public class LibroControllerJPA {
