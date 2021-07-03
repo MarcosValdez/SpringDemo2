@@ -60,7 +60,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             Sheet sheet = workbook.createSheet("Libros");
             sheet.setDefaultColumnWidth(20);
-            
+
             Row row = sheet.createRow(0);
 
             for (int i = 0; i < headers.length; i++) {
@@ -78,10 +78,12 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createStringCell(p.getNombre(), row, 1, rowStyle);
                 ExcelUtil.createStringCell(p.getDescripcion(), row, 2, rowStyle);
                 ExcelUtil.createStringCell(p.getCategoria(), row, 3, rowStyle);
-                ExcelUtil.createIntegerCell(p.getPaginas(), row, 4, rowStyle);
+                ExcelUtil.createStringCell(p.getPaginas(), row, 4, rowStyle);
                 ExcelUtil.createStringCell(p.getAutor(), row, 5, rowStyle);
                 ExcelUtil.createStringCell(p.getEditorial(), row, 6, rowStyle);
-                ExcelUtil.createStringCell(p.getFecha().toString(), row, 7, rowStyle);
+                if(p.getFecha() != null){
+                    ExcelUtil.createStringCell(p.getFecha().toString(), row, 7, rowStyle);
+                }
 
                 row.setRowStyle(rowStyle);
                 initRow++;
@@ -91,12 +93,14 @@ public class LibroServiceJPA implements ILibroServiceJPA {
             workbook.close();
             return new ByteArrayInputStream(stream.toByteArray());
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw ex;
         }
     }
 
     @Override
     public List<ReporteDTO> listar(ParametrosDTO parametrosDTO) {
-        return null;
+
+        return reporteRepository.listar(parametrosDTO);
     }
 }

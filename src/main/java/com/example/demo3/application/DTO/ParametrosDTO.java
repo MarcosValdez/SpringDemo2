@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ParametrosDTO {
     private String nombre;
-    private String autor;
+    private Integer autor;
     private Integer categoria;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -13,7 +13,7 @@ public class ParametrosDTO {
         return nombre;
     }
 
-    public String getAutor() {
+    public Integer getAutor() {
         return autor;
     }
 

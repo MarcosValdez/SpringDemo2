@@ -79,9 +79,10 @@ public class LibroControllerJPA {
         }
     }
 
-    @GetMapping(value = "/export")
+    @PostMapping(value = "/export")
     public ResponseEntity<InputStreamSource> exportarExcel(@RequestBody ParametrosDTO parametrosDTO) {
         try {
+            System.out.println(parametrosDTO.getNombre());
             ByteArrayInputStream stream = libroServiceJPA.exportExcel(parametrosDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Libros.xls");

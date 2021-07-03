@@ -17,45 +17,55 @@ public class ReporteRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    List<ReporteDTO> listar(ParametrosDTO caso) {
+    public List<ReporteDTO> listar(ParametrosDTO caso) {
 
         boolean insertoPrimero = false;
         StringBuilder sql = new StringBuilder();
-        sql.append("select l. from libro l where ");
+        sql.append("select l.nombre, l.libro_id, l.descripcion, l.paginas, l.fecha, a.nombre as autor, c.nombre as categoria, e.nombre as editorial " +
+                "from libro l left join autor a on l.autor_id = a.autor_id left join categoria c on c.categoria_id = l.categoria_id " +
+                "left join editorial e on e.editorial_id = l.editorial_id ");
 
         if (caso.getNombre() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
+            }else{
+                sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append(" like '%" + caso.getNombre() + "%'");
+            sql.append("l.nombre like '%" + caso.getNombre() + "%'");
         }
 
         if (caso.getAutor() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
+            }else{
+                sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append(" = " + caso.getAutor());
+            sql.append("a.nombre = " + caso.getAutor());
         }
 
         if (caso.getCategoria() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
+            }else{
+                sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append(" = " + caso.getCategoria());
+            sql.append("c.nombre = " + caso.getCategoria());
         }
 
         if (caso.getFechaInicio() != null && caso.getFechaFin() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
+            }else{
+                sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append(" BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "'");
+            sql.append("l.fecha BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "'");
         }
 
-        sql.append(" ORDER BY  ");
+        sql.append(" ORDER BY  l.libro_id");
 
         return (List<ReporteDTO>) jdbcTemplate.query(sql.toString(), new ReportesMapper());
     }
@@ -66,14 +76,14 @@ public class ReporteRepository {
         public ReporteDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 
             ReporteDTO t = new ReporteDTO();
-            t.setId(rs.getInt(""));
-            t.setNombre(rs.getString(""));
-            t.setAutor(rs.getString(""));
-            t.setCategoria(rs.getString(""));
-            t.setEditorial(rs.getString(""));
-            t.setPaginas(rs.getInt(""));
-            t.setFecha(rs.getDate("").toLocalDate());
-            t.setDescripcion(rs.getString(""));
+            t.setId(rs.getInt("libro_id"));
+            t.setNombre(rs.getString("nombre"));
+            t.setAutor(rs.getString("autor"));
+            t.setCategoria(rs.getString("categoria"));
+            t.setEditorial(rs.getString("editorial"));
+            t.setPaginas(rs.getString("paginas"));
+            t.setFecha(rs.getDate("fecha").toLocalDate());
+            t.setDescripcion(rs.getString("descripcion"));
 
             return t;
         }

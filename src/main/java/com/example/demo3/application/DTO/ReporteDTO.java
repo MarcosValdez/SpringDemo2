@@ -11,7 +11,7 @@ public class ReporteDTO {
     private String autor;
     private String categoria;
     private LocalDate fecha;
-    private Integer paginas;
+    private String paginas;
     private String editorial;
     private String descripcion;
 
@@ -55,11 +55,11 @@ public class ReporteDTO {
         this.fecha = fecha;
     }
 
-    public Integer getPaginas() {
+    public String getPaginas() {
         return paginas;
     }
 
-    public void setPaginas(Integer paginas) {
+    public void setPaginas(String paginas) {
         this.paginas = paginas;
     }
 
