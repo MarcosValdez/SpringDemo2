@@ -27,13 +27,22 @@ public class AutorControllerJPA {
         }
     }
 
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<AutorJPA>> listById(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity(autorServiceJPA.getById(id), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/save")
     public ResponseEntity<ServiceResult> create(@RequestBody String autor) {
 
         ServiceResult serviceResult = new ServiceResult();
         try {
             AutorJPA a = new ObjectMapper().readValue(autor, AutorJPA.class);
-            autorServiceJPA.save(a);
+            libroServiceJPA.save(a);
             serviceResult.setMessage("autor registrado");
             serviceResult.setData(null);
             return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
@@ -42,7 +51,25 @@ public class AutorControllerJPA {
             ex.printStackTrace();
             serviceResult.setError(ex.getMessage());
             serviceResult.setSuccess(false);
-            return new ResponseEntity<>(serviceResult, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ServiceResult> delete(@PathVariable Integer id) {
+        ServiceResult serviceResult = new ServiceResult();
+
+        try {
+            autorServiceJPA.delete(id);
+            serviceResult.setMessage("Autor eliminado");
+            serviceResult.setData(null);
+            return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            serviceResult.setError(ex.getMessage());
+            serviceResult.setSuccess(false);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

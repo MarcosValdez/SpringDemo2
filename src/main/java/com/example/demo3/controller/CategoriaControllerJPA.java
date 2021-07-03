@@ -29,4 +29,50 @@ public class CategoriaControllerJPA {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<CategoriaJPA>> listById(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity(categoriaServiceJPA.getById(id), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<ServiceResult> create(@RequestBody String categoria) {
+
+        ServiceResult serviceResult = new ServiceResult();
+        try {
+            CategoriaJPA a = new ObjectMapper().readValue(categoria, CategoriaJPA.class);
+            categoriaServiceJPA.save(a);
+            serviceResult.setMessage("categoria registrada");
+            serviceResult.setData(null);
+            return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            serviceResult.setError(ex.getMessage());
+            serviceResult.setSuccess(false);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ServiceResult> delete(@PathVariable Integer id) {
+        ServiceResult serviceResult = new ServiceResult();
+
+        try {
+            categoriaServiceJPA.delete(id);
+            serviceResult.setMessage("Categoria eliminado");
+            serviceResult.setData(null);
+            return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            serviceResult.setError(ex.getMessage());
+            serviceResult.setSuccess(false);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
