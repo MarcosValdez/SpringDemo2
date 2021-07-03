@@ -18,4 +18,9 @@ public class AutorServiceJPA implements IAutorServiceJPA {
     public List<AutorJPA> list() {
         return null;
     }
+
+    @Override
+    public AutorJPA save(AutorJPA autor) {
+        return autorRepository.save(autor);
+    }
 }

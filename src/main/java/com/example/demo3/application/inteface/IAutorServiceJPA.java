@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IAutorServiceJPA {
     List<AutorJPA> list();
+    AutorJPA save(AutorJPA autor);
 }
