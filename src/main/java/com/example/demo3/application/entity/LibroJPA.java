@@ -39,8 +39,19 @@ public class LibroJPA {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "precio")
+    private String precio;
+
     public String getEstado() {
         return estado;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 
     public void setEstado(String estado) {
