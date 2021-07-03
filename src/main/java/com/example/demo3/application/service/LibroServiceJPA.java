@@ -50,9 +50,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
     @Override
     public LibroJPA save(LibroJPA libro) {
-        CategoriaJPA categoriaJPA = categoriaServiceJPA.save(libro.getCategoria());
         AutorJPA autor = autorServiceJPA.save(libro.getAutor());
-        libro.setCategoria(categoriaJPA);
         libro.setAutor(autor);
         libro.setFecha(LocalDateTime.now());
         return libroRepository.save(libro);
