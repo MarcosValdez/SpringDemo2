@@ -19,6 +19,7 @@ public class Demo3Application {
 						.allowedHeaders("*")
 						.allowedOrigins("*")
 						.allowedMethods("*")
+						//.allowedOriginPatterns("http://localhost:4200")
 						.allowCredentials(false);
 			}
 		};
