@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IAutorServiceJPA {
     List<AutorJPA> list();
+    AutorJPA getById(Integer id);
     AutorJPA save(AutorJPA autor);
+    void delete(Integer id);
 }

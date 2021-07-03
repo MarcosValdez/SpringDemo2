@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ICompradorServiceJPA {
     List<CompradorJPA> list();
+    CompradorJPA getById(Integer id);
+    CompradorJPA save(CompradorJPA comprador);
+    void delete(Integer id);
 }
