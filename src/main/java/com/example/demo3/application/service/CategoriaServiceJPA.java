@@ -2,6 +2,7 @@ package com.example.demo3.application.service;
 
 import com.example.demo3.application.entity.CategoriaJPA;
 import com.example.demo3.application.inteface.ICategoriaServiceJPA;
+import com.example.demo3.infrastructure.mapper.CategoriaRepository;
 import com.example.demo3.infrastructure.mapper.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

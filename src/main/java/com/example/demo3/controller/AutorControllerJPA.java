@@ -42,7 +42,7 @@ public class AutorControllerJPA {
         ServiceResult serviceResult = new ServiceResult();
         try {
             AutorJPA a = new ObjectMapper().readValue(autor, AutorJPA.class);
-            libroServiceJPA.save(a);
+            autorServiceJPA.save(a);
             serviceResult.setMessage("autor registrado");
             serviceResult.setData(null);
             return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
