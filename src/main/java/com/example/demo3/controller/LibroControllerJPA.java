@@ -2,6 +2,7 @@ package com.example.demo3.controller;
 
 import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.entity.LibroJPA;
+import com.example.demo3.application.entity.VentaJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ServiceResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,10 +28,12 @@ public class LibroControllerJPA {
     @GetMapping("/list")
     public ResponseEntity<List<LibroJPA>> list() {
         try {
+
             return new ResponseEntity(libroServiceJPA.list(), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     @GetMapping("/list/{id}")

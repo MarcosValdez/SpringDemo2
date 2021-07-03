@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class Demo3Application {
-	@Bean
+	/*@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
@@ -19,10 +19,11 @@ public class Demo3Application {
 						.allowedHeaders("*")
 						.allowedOrigins("*")
 						.allowedMethods("*")
+						.allowedOriginPatterns("http://localhost:8080")
 						.allowCredentials(false);
 			}
 		};
-	}
+	}*/
 	public static void main(String[] args) {
 		SpringApplication.run(Demo3Application.class, args);
 	}

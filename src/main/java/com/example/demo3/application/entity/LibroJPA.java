@@ -36,6 +36,28 @@ public class LibroJPA {
     @Column(name = "fecha")
     private LocalDateTime fecha;
 
+    @Column(name = "estado")
+    private String estado;
+
+    @Column(name = "precio")
+    private String precio;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Integer getLibroId() {
         return libroId;
     }
