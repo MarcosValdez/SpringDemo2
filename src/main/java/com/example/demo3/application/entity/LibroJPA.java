@@ -42,6 +42,9 @@ public class LibroJPA {
     @Column(name = "precio")
     private String precio;
 
+    @Column(name = "cantidad")
+    private Integer cantidad;
+
     public String getEstado() {
         return estado;
     }
@@ -122,5 +125,11 @@ public class LibroJPA {
         this.fecha = fecha;
     }
 
+    public Integer getCantidad() {
+        return cantidad;
+    }
 
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 }
