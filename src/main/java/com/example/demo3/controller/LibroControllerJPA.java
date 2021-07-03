@@ -26,8 +26,13 @@ public class LibroControllerJPA {
 
     @GetMapping("/list")
     public ResponseEntity<List<LibroJPA>> list() {
+        ServiceResult serviceResult = new ServiceResult();
         try {
-            return new ResponseEntity(libroServiceJPA.list(), HttpStatus.OK);
+
+            serviceResult.setData(libroServiceJPA.list());
+            serviceResult.setMessage("success");
+
+            return new ResponseEntity(serviceResult, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
