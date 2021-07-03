@@ -19,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/librojpa")
+@RequestMapping("/api/v1/libro")
 public class LibroControllerJPA {
 
     @Autowired
