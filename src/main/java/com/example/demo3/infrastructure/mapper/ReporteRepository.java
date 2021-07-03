@@ -42,7 +42,7 @@ public class ReporteRepository {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("a.nombre = " + caso.getAutor());
+            sql.append("a.nombre like '%" + caso.getAutor()+"%' ");
         }
 
         if (caso.getCategoria() != null) {
