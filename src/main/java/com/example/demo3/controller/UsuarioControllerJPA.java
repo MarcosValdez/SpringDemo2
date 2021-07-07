@@ -1,8 +1,9 @@
 package com.example.demo3.controller;
 
 import com.example.demo3.application.entity.LibroJPA;
+import com.example.demo3.application.entity.UsuarioJPA;
 import com.example.demo3.application.entity.VentaJPA;
-import com.example.demo3.application.service.VentaServiceJPA;
+import com.example.demo3.application.inteface.IUsuarioService;
 import com.example.demo3.infrastructure.common.ServiceResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +15,25 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/venta")
-public class VentaControllerJPA {
+@RequestMapping("/api/v1/usuario")
+public class UsuarioControllerJPA {
+
     @Autowired
-    VentaServiceJPA ventaServiceJPA;
+    IUsuarioService usuarioServiceJPA;
 
     @GetMapping("/list")
-    public ResponseEntity<List<VentaJPA>> list() {
+    public ResponseEntity<List<UsuarioJPA>> list() {
         try {
-            return new ResponseEntity(ventaServiceJPA.list(), HttpStatus.OK);
+            return new ResponseEntity(usuarioServiceJPA.list(), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/list/{id}")
-    public ResponseEntity<List<LibroJPA>> listById(@PathVariable Integer id) {
+    public ResponseEntity<List<UsuarioJPA>> listById(@PathVariable Integer id) {
         try {
-            return new ResponseEntity(ventaServiceJPA.getById(id), HttpStatus.OK);
+            return new ResponseEntity(usuarioServiceJPA.getById(id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -42,10 +44,10 @@ public class VentaControllerJPA {
 
         ServiceResult serviceResult = new ServiceResult();
         try {
-            VentaJPA a = new ObjectMapper().readValue(venta, VentaJPA.class);
-            ventaServiceJPA.save(a);
+            UsuarioJPA a = new ObjectMapper().readValue(venta, UsuarioJPA.class);
+            //usuarioServiceJPA.save(a);
             serviceResult.setMessage("venta registrada");
-            serviceResult.setData(null);
+            serviceResult.setData(usuarioServiceJPA.save(a));
             return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
 
         } catch (Exception ex) {
@@ -56,14 +58,14 @@ public class VentaControllerJPA {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ServiceResult> delete(@PathVariable Integer id) {
+    @PostMapping("/login")
+    public ResponseEntity<ServiceResult> validar(@RequestBody String usuario) {
+
         ServiceResult serviceResult = new ServiceResult();
-
         try {
-            ventaServiceJPA.delete(id);
-            serviceResult.setMessage("Venta eliminada");
-            serviceResult.setData(null);
+            UsuarioJPA a = new ObjectMapper().readValue(usuario, UsuarioJPA.class);
+            serviceResult.setMessage("venta registrada");
+            serviceResult.setData(usuarioServiceJPA.validar(a));
             return new ResponseEntity<>(serviceResult, HttpStatus.CREATED);
 
         } catch (Exception ex) {
@@ -73,4 +75,5 @@ public class VentaControllerJPA {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

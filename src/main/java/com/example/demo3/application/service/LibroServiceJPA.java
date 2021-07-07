@@ -3,11 +3,9 @@ package com.example.demo3.application.service;
 import com.example.demo3.application.DTO.ParametrosDTO;
 import com.example.demo3.application.DTO.ReporteDTO;
 import com.example.demo3.application.entity.AutorJPA;
-import com.example.demo3.application.entity.CategoriaJPA;
 import com.example.demo3.application.entity.EditorialJPA;
 import com.example.demo3.application.entity.LibroJPA;
 import com.example.demo3.application.inteface.IAutorServiceJPA;
-import com.example.demo3.application.inteface.ICategoriaServiceJPA;
 import com.example.demo3.application.inteface.IEditorialServiceJPA;
 import com.example.demo3.application.inteface.ILibroServiceJPA;
 import com.example.demo3.infrastructure.common.ExcelUtil;
@@ -20,9 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service("libroServiceJPA")
@@ -81,7 +77,13 @@ public class LibroServiceJPA implements ILibroServiceJPA {
             Sheet sheet = workbook.createSheet("Libros");
             sheet.setDefaultColumnWidth(20);
 
-            Row row = sheet.createRow(0);
+
+            Row cabecera = sheet.createRow(0);
+
+            Cell cellHeader = cabecera.createCell(0);
+            cellHeader.setCellValue("Reporte de ventas");
+
+            Row row = sheet.createRow(1);
 
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = row.createCell(i);
@@ -89,7 +91,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 cell.setCellStyle(headerStyle);
             }
 
-            int initRow = 1;
+            int initRow = 2;
             for (ReporteDTO p : listar(parametrosDTO)) {
                 row = sheet.createRow(initRow);
                 row.setHeightInPoints((2 * sheet.getDefaultRowHeightInPoints()));
@@ -110,6 +112,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
             }
 
             workbook.write(stream);
+            stream.close();
             workbook.close();
             return new ByteArrayInputStream(stream.toByteArray());
         } catch (Exception ex) {
