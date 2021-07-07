@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class LibroJPA {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "libro_id")
     private Integer libroId;
 
@@ -44,6 +44,9 @@ public class LibroJPA {
 
     @Column(name = "cantidad")
     private Integer cantidad;
+
+    @Column(name = "imagen")
+    private String imagen;
 
     public String getEstado() {
         return estado;
@@ -131,5 +134,13 @@ public class LibroJPA {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
