@@ -22,14 +22,14 @@ public class ReporteRepository {
         boolean insertoPrimero = false;
         StringBuilder sql = new StringBuilder();
         sql.append("select v.venta_id, co.nombre, co.apellido, l.nombre as libro, a.nombre as autor, c.nombre as categoria, e.nombre as editorial, v.fecha, co.dni, \n" +
-                " l.descripcion, l.paginas, l.anio, l.precio, from ventas v \n" +
-                " left join libro l on on v.libro_id = l.libro_id \n" +
-                " left join autor a on l.autor_id = a.autor_id \n" +
-                " left join categoria c on l.categoria_id = c.categoria_id\n" +
-                " left join editorial e on l.editorial_id = e.editorial_id \n" +
+                " l.descripcion, l.paginas, l.anio, l.precio, from ventas v " +
+                " left join libro l on v.libro_id = l.libro_id " +
+                " left join autor a on l.autor_id = a.autor_id " +
+                " left join categoria c on l.categoria_id = c.categoria_id " +
+                " left join editorial e on l.editorial_id = e.editorial_id " +
                 " left join comprador co on v.comprador_id = co.comprador_id ");
 
-        if (caso.getNombre() != null) {
+        if (caso.getNombre() != null && caso.getNombre().length() > 0) {
             if (insertoPrimero) {
                 sql.append(" and ");
             } else {
@@ -39,7 +39,7 @@ public class ReporteRepository {
             sql.append(" l.nombre like '%" + caso.getNombre() + "%' ");
         }
 
-        if (caso.getAutor() != null) {
+        if (caso.getAutor() != null && caso.getAutor().length() > 0) {
             if (insertoPrimero) {
                 sql.append(" and ");
             } else {
@@ -66,10 +66,11 @@ public class ReporteRepository {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append(" l.fecha BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "' ");
+            sql.append(" v.fecha BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "' ");
         }
 
         sql.append(" ORDER BY l.libro_id");
+        System.out.println(sql.toString());
 
         return (List<ReporteDTO>) jdbcTemplate.query(sql.toString(), new ReportesMapper());
     }
@@ -91,9 +92,9 @@ public class ReporteRepository {
             t.setPaginas(rs.getInt("paginas"));
             t.setAnio(rs.getInt("anio"));
             t.setPrecio(rs.getString("precio"));
-            if (rs.getDate("fecha") != null) {
+            /*if (rs.getDate("fecha") != null) {
                 t.setFecha(rs.getDate("fecha").toLocalDate());
-            }
+            }*/
 
             return t;
         }
