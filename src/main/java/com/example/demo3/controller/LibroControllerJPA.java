@@ -94,13 +94,24 @@ public class LibroControllerJPA {
         }
     }
 
-    @PostMapping(value = "/export")
-    public ResponseEntity<InputStreamSource> exportarExcel(@RequestBody ParametrosDTO parametrosDTO) {
+    @PostMapping(value = "/export/reporte")
+    public ResponseEntity<InputStreamSource> exportarExcelVenta(@RequestBody ParametrosDTO parametrosDTO) {
         try {
-            System.out.println(parametrosDTO.getNombre());
             ByteArrayInputStream stream = libroServiceJPA.exportExcel(parametrosDTO);
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Libros.xls");
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Reporte.xls");
+            return ResponseEntity.ok().headers(headers).body(new InputStreamResource(stream));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PostMapping(value = "/export/inventario")
+    public ResponseEntity<InputStreamSource> exportarExcel() {
+        try {
+            ByteArrayInputStream stream = libroServiceJPA.exportExcelInventario();
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Inventario.xls");
             return ResponseEntity.ok().headers(headers).body(new InputStreamResource(stream));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
