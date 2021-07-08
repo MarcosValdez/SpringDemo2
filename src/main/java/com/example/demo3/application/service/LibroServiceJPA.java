@@ -52,7 +52,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
         EditorialJPA editorial = editorialServiceJPA.save(libro.getEditorial());
         libro.setAutor(autor);
         libro.setEditorial(editorial);
-        libro.setFecha(LocalDateTime.now());
+        /*libro.setFecha(LocalDateTime.now());*/
         return libroRepository.save(libro);
     }
 
