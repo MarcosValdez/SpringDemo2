@@ -21,9 +21,13 @@ public class ReporteRepository {
 
         boolean insertoPrimero = false;
         StringBuilder sql = new StringBuilder();
-        sql.append("select l.nombre, l.libro_id, l.descripcion, l.paginas, l.fecha, a.nombre as autor, c.nombre as categoria, e.nombre as editorial " +
-                "from libro l left join autor a on l.autor_id = a.autor_id left join categoria c on c.categoria_id = l.categoria_id " +
-                "left join editorial e on e.editorial_id = l.editorial_id ");
+        sql.append("select v.venta_id, co.nombre, co.apellido, l.nombre as libro, a.nombre as autor, c.nombre as categoria, e.nombre as editorial, v.fecha, co.dni, \n" +
+                " l.descripcion, l.paginas, l.anio, l.precio, from ventas v \n" +
+                " left join libro l on on v.libro_id = l.libro_id \n" +
+                " left join autor a on l.autor_id = a.autor_id \n" +
+                " left join categoria c on l.categoria_id = c.categoria_id\n" +
+                " left join editorial e on l.editorial_id = e.editorial_id \n" +
+                " left join comprador co on v.comprador_id = co.comprador_id ");
 
         if (caso.getNombre() != null) {
             if (insertoPrimero) {
