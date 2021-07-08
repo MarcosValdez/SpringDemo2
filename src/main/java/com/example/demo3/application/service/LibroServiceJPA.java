@@ -82,7 +82,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             Cell cellHeader = cabecera.createCell(0);
             cellHeader.setCellValue("Reporte de ventas");
-            //cellHeader.setCellStyle(titleStyle);
+            cellHeader.setCellStyle(titleStyle);
 
             Row row = sheet.createRow(1);
 
@@ -146,7 +146,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             Cell cellHeader = cabecera.createCell(0);
             cellHeader.setCellValue("Inventario de libros");
-            //cellHeader.setCellStyle(tituloStyle);
+            cellHeader.setCellStyle(tituloStyle);
 
             Row row = sheet.createRow(1);
 
@@ -168,7 +168,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createIntegerCell(p.getPaginas(), row, 4, rowStyle);
                 ExcelUtil.createStringCell(p.getAutor().getNombre(), row, 5, rowStyle);
                 ExcelUtil.createStringCell(p.getEditorial().getNombre(), row, 6, rowStyle);
-                //ExcelUtil.createIntegerCell(p.getAnio(), row, 7, rowStyle);
+                ExcelUtil.createIntegerCell(p.getAnio(), row, 7, rowStyle);
                 ExcelUtil.createStringCell(p.getPrecio(), row, 8, rowStyle);
 
 
