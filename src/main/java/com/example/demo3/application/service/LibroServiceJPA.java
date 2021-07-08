@@ -66,7 +66,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
     @Override
     public ByteArrayInputStream exportExcel(ParametrosDTO parametrosDTO) throws Exception {
         try {
-            String[] headers = {"Id", "Nombre", "Descripción", "Categoria", "Páginas", "Autor", "Editorial", "Fecha"};
+            String[] headers = {"Id", "Comprador", "DNI", "Fecha de compra", "Libro", "Descripción", "Categoria", "Páginas", "Autor", "Editorial", "Año publicación", "Precio"};
 
             Workbook workbook = new HSSFWorkbook();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -76,7 +76,6 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             Sheet sheet = workbook.createSheet("Libros");
             sheet.setDefaultColumnWidth(20);
-
 
             Row cabecera = sheet.createRow(0);
 
@@ -97,15 +96,19 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 row.setHeightInPoints((2 * sheet.getDefaultRowHeightInPoints()));
 
                 ExcelUtil.createIntegerCell(p.getId(), row, 0, rowStyle);
-                ExcelUtil.createStringCell(p.getNombre(), row, 1, rowStyle);
-                ExcelUtil.createStringCell(p.getDescripcion(), row, 2, rowStyle);
-                ExcelUtil.createStringCell(p.getCategoria(), row, 3, rowStyle);
-                ExcelUtil.createStringCell(p.getPaginas(), row, 4, rowStyle);
-                ExcelUtil.createStringCell(p.getAutor(), row, 5, rowStyle);
-                ExcelUtil.createStringCell(p.getEditorial(), row, 6, rowStyle);
+                ExcelUtil.createStringCell(p.getComprador(), row, 1, rowStyle);
+                ExcelUtil.createStringCell(p.getDni(), row, 2, rowStyle);
                 if (p.getFecha() != null) {
-                    ExcelUtil.createStringCell(p.getFecha().toString(), row, 7, rowStyle);
+                    ExcelUtil.createStringCell(p.getFecha().toString(), row, 3, rowStyle);
                 }
+                ExcelUtil.createStringCell(p.getNombrelibro(), row, 4, rowStyle);
+                ExcelUtil.createStringCell(p.getDescripcion(), row, 5, rowStyle);
+                ExcelUtil.createStringCell(p.getCategoria(), row, 6, rowStyle);
+                ExcelUtil.createIntegerCell(p.getPaginas(), row, 7, rowStyle);
+                ExcelUtil.createStringCell(p.getAutor(), row, 8, rowStyle);
+                ExcelUtil.createStringCell(p.getEditorial(), row, 9, rowStyle);
+                ExcelUtil.createIntegerCell(p.getAnio(), row, 10, rowStyle);
+                ExcelUtil.createStringCell(p.getPrecio(), row, 11, rowStyle);
 
                 row.setRowStyle(rowStyle);
                 initRow++;
@@ -131,6 +134,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             CellStyle headerStyle = ExcelUtil.headersStyle(workbook);
             CellStyle rowStyle = ExcelUtil.rowsStyle(workbook);
+            CellStyle tituloStyle = ExcelUtil.titulo(workbook);
 
             Sheet sheet = workbook.createSheet("Libros");
             sheet.setDefaultColumnWidth(20);
@@ -139,7 +143,8 @@ public class LibroServiceJPA implements ILibroServiceJPA {
             Row cabecera = sheet.createRow(0);
 
             Cell cellHeader = cabecera.createCell(0);
-            cellHeader.setCellValue("Reporte de ventas");
+            cellHeader.setCellValue("Inventario de libros");
+            cellHeader.setCellStyle(tituloStyle);
 
             Row row = sheet.createRow(1);
 
@@ -161,7 +166,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createIntegerCell(p.getPaginas(), row, 4, rowStyle);
                 ExcelUtil.createStringCell(p.getAutor().getNombre(), row, 5, rowStyle);
                 ExcelUtil.createStringCell(p.getEditorial().getNombre(), row, 6, rowStyle);
-
+                ExcelUtil.createIntegerCell(p.getAnio(), row, 7, rowStyle);
                 ExcelUtil.createStringCell(p.getPrecio(), row, 7, rowStyle);
 
 

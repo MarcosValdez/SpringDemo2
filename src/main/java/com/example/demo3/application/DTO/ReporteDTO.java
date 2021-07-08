@@ -7,13 +7,17 @@ import java.time.LocalDate;
 public class ReporteDTO {
 
     private Integer id;
-    private String nombre;
+    private String nombrelibro;
+    private String comprador;
     private String autor;
     private String categoria;
     private LocalDate fecha;
-    private String paginas;
     private String editorial;
+    private String dni;
     private String descripcion;
+    private Integer paginas;
+    private Integer anio;
+    private String precio;
 
     public Integer getId() {
         return id;
@@ -23,12 +27,20 @@ public class ReporteDTO {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombrelibro() {
+        return nombrelibro;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombrelibro(String nombrelibro) {
+        this.nombrelibro = nombrelibro;
+    }
+
+    public String getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(String comprador) {
+        this.comprador = comprador;
     }
 
     public String getAutor() {
@@ -55,14 +67,6 @@ public class ReporteDTO {
         this.fecha = fecha;
     }
 
-    public String getPaginas() {
-        return paginas;
-    }
-
-    public void setPaginas(String paginas) {
-        this.paginas = paginas;
-    }
-
     public String getEditorial() {
         return editorial;
     }
@@ -71,11 +75,43 @@ public class ReporteDTO {
         this.editorial = editorial;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(Integer paginas) {
+        this.paginas = paginas;
+    }
+
+    public Integer getAnio() {
+        return anio;
+    }
+
+    public void setAnio(Integer anio) {
+        this.anio = anio;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 }

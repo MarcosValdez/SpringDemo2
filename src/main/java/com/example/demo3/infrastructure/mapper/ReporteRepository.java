@@ -28,44 +28,44 @@ public class ReporteRepository {
         if (caso.getNombre() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
-            }else{
+            } else {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("l.nombre like '%" + caso.getNombre() + "%'");
+            sql.append(" l.nombre like '%" + caso.getNombre() + "%' ");
         }
 
         if (caso.getAutor() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
-            }else{
+            } else {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("a.nombre like '%" + caso.getAutor()+"%' ");
+            sql.append(" a.nombre like '%" + caso.getAutor() + "%' ");
         }
 
         if (caso.getCategoria() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
-            }else{
+            } else {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("c.categoria_id = " + caso.getCategoria());
+            sql.append(" c.categoria_id = " + caso.getCategoria());
         }
 
         if (caso.getFechaInicio() != null && caso.getFechaFin() != null) {
             if (insertoPrimero) {
                 sql.append(" and ");
-            }else{
+            } else {
                 sql.append(" where ");
             }
             insertoPrimero = true;
-            sql.append("l.fecha BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "'");
+            sql.append(" l.fecha BETWEEN '" + caso.getFechaInicio() + "' and '" + caso.getFechaFin() + "' ");
         }
 
-        sql.append(" ORDER BY  l.libro_id");
+        sql.append(" ORDER BY l.libro_id");
 
         return (List<ReporteDTO>) jdbcTemplate.query(sql.toString(), new ReportesMapper());
     }
@@ -76,16 +76,20 @@ public class ReporteRepository {
         public ReporteDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 
             ReporteDTO t = new ReporteDTO();
-            t.setId(rs.getInt("libro_id"));
-            t.setNombre(rs.getString("nombre"));
+            t.setId(rs.getInt("venta_id"));
+            t.setComprador(rs.getString("nombre") + " " + rs.getString("apellido"));
+            t.setNombrelibro(rs.getString("libro"));
             t.setAutor(rs.getString("autor"));
             t.setCategoria(rs.getString("categoria"));
             t.setEditorial(rs.getString("editorial"));
-            t.setPaginas(rs.getString("paginas"));
-            if(rs.getDate("fecha") != null){
+            t.setDni(rs.getString("dni"));
+            t.setDescripcion(rs.getString("descripcion"));
+            t.setPaginas(rs.getInt("paginas"));
+            t.setAnio(rs.getInt("anio"));
+            t.setPrecio(rs.getString("precio"));
+            if (rs.getDate("fecha") != null) {
                 t.setFecha(rs.getDate("fecha").toLocalDate());
             }
-            t.setDescripcion(rs.getString("descripcion"));
 
             return t;
         }

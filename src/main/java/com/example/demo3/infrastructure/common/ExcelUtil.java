@@ -7,7 +7,7 @@ import java.util.Date;
 public class ExcelUtil {
     public static CellStyle headersStyle(Workbook wb){
         Font fontTitle = wb.createFont();
-        fontTitle.setFontHeightInPoints((short)9);
+        fontTitle.setFontHeightInPoints((short)10);
         fontTitle.setFontName("Arial");
         fontTitle.setBold(true);
         fontTitle.setColor(IndexedColors.WHITE.getIndex());
@@ -18,6 +18,18 @@ public class ExcelUtil {
         styleTitle.setFillForegroundColor(IndexedColors.ROYAL_BLUE.getIndex());
         styleTitle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         return styleTitle;
+    }
+
+    public static CellStyle titulo(Workbook wb){
+        Font fontColumn = wb.createFont();
+        fontColumn.setFontHeightInPoints((short)14);
+        fontColumn.setFontName("Arial");
+        fontColumn.setBold(true);
+
+        CellStyle styleColumn = wb.createCellStyle();
+        styleColumn.setFont(fontColumn);
+        styleColumn.setWrapText(true);
+        return styleColumn;
     }
 
     public static CellStyle rowsStyle(Workbook wb){
