@@ -20,6 +20,8 @@ public class VentaJPA {
     @JoinColumn(name = "libro_id")
     private LibroJPA libro;
 
+    @Column(name = "fecha")
+    private LocalDateTime fecha;
 
     public Integer getVentaId() {
         return ventaId;
@@ -45,5 +47,11 @@ public class VentaJPA {
         this.libro = libro;
     }
 
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
 
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
 }
