@@ -33,8 +33,8 @@ public class LibroJPA {
     @Column(name = "paginas")
     private Integer paginas;
 
-    @Column(name = "fecha")
-    private LocalDateTime fecha;
+    @Column(name = "anio")
+    private Integer anio;
 
     @Column(name = "estado")
     private String estado;
@@ -47,6 +47,14 @@ public class LibroJPA {
 
     @Column(name = "imagen")
     private String imagen;
+
+    public Integer getAnio() {
+        return anio;
+    }
+
+    public void setAnio(Integer anio) {
+        this.anio = anio;
+    }
 
     public String getEstado() {
         return estado;
@@ -118,14 +126,6 @@ public class LibroJPA {
 
     public void setPaginas(Integer paginas) {
         this.paginas = paginas;
-    }
-
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
     }
 
     public Integer getCantidad() {

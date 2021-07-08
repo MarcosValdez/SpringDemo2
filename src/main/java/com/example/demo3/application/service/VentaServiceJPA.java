@@ -40,7 +40,7 @@ public class VentaServiceJPA implements IVentaServiceJPA {
     public VentaJPA save(VentaJPA venta) {
         CompradorJPA compradorJPA = compradorServiceJPA.save(venta.getComprador());
         venta.setComprador(compradorJPA);
-        venta.setFecha(LocalDateTime.now());
+        /*venta.setFecha(LocalDateTime.now());*/
         libroServiceJPA.vender(venta.getLibro().getLibroId());
         return ventaRepository.save(venta);
     }
