@@ -22,7 +22,7 @@ public class ReporteRepository {
         boolean insertoPrimero = false;
         StringBuilder sql = new StringBuilder();
         sql.append("select v.venta_id, co.nombre, co.apellido, l.nombre as libro, a.nombre as autor, c.nombre as categoria, " +
-                " e.nombre as editorial, v.fecha, co.dni, l.descripcion, l.paginas, l.anio, l.precio, from ventas v " +
+                " e.nombre as editorial, v.fecha, co.dni, l.descripcion, l.paginas, l.anio, l.precio from venta v " +
                 " left join libro l on v.libro_id = l.libro_id left join autor a on l.autor_id = a.autor_id " +
                 " left join categoria c on l.categoria_id = c.categoria_id left join editorial e on l.editorial_id = e.editorial_id " +
                 " left join comprador co on v.comprador_id = co.comprador_id ");
