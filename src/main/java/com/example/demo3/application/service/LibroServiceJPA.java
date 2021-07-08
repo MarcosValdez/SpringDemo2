@@ -73,6 +73,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             CellStyle headerStyle = ExcelUtil.headersStyle(workbook);
             CellStyle rowStyle = ExcelUtil.rowsStyle(workbook);
+            CellStyle titleStyle = ExcelUtil.titulo(workbook);
 
             Sheet sheet = workbook.createSheet("Libros");
             sheet.setDefaultColumnWidth(20);
@@ -81,6 +82,7 @@ public class LibroServiceJPA implements ILibroServiceJPA {
 
             Cell cellHeader = cabecera.createCell(0);
             cellHeader.setCellValue("Reporte de ventas");
+            cellHeader.setCellStyle(titleStyle);
 
             Row row = sheet.createRow(1);
 
