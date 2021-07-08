@@ -86,9 +86,9 @@ public class ReporteRepository {
             t.setPaginas(rs.getInt("paginas"));
             t.setAnio(rs.getInt("anio"));
             t.setPrecio(rs.getString("precio"));
-            /*if (rs.getDate("fecha") != null) {
+            if (rs.getDate("fecha") != null) {
                 t.setFecha(rs.getDate("fecha").toLocalDate());
-            }*/
+            }
 
             return t;
         }

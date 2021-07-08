@@ -100,9 +100,9 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createIntegerCell(p.getId(), row, 0, rowStyle);
                 ExcelUtil.createStringCell(p.getComprador(), row, 1, rowStyle);
                 ExcelUtil.createStringCell(p.getDni(), row, 2, rowStyle);
-                /*if (p.getFecha() != null) {
+                if (p.getFecha() != null) {
                     ExcelUtil.createStringCell(p.getFecha().toString(), row, 3, rowStyle);
-                }*/
+                }
                 ExcelUtil.createStringCell(p.getNombrelibro(), row, 4, rowStyle);
                 ExcelUtil.createStringCell(p.getDescripcion(), row, 5, rowStyle);
                 ExcelUtil.createStringCell(p.getCategoria(), row, 6, rowStyle);
