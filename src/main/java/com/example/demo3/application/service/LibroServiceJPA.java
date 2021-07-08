@@ -103,9 +103,67 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createStringCell(p.getPaginas(), row, 4, rowStyle);
                 ExcelUtil.createStringCell(p.getAutor(), row, 5, rowStyle);
                 ExcelUtil.createStringCell(p.getEditorial(), row, 6, rowStyle);
-                if(p.getFecha() != null){
+                if (p.getFecha() != null) {
                     ExcelUtil.createStringCell(p.getFecha().toString(), row, 7, rowStyle);
                 }
+
+                row.setRowStyle(rowStyle);
+                initRow++;
+            }
+
+            workbook.write(stream);
+            stream.close();
+            workbook.close();
+            return new ByteArrayInputStream(stream.toByteArray());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
+
+    @Override
+    public ByteArrayInputStream exportExcelInventario() throws Exception {
+        try {
+            String[] headers = {"Id", "Nombre", "Descripción", "Categoria", "Páginas", "Autor", "Editorial", "Año de publicacion", "Precio"};
+
+            Workbook workbook = new HSSFWorkbook();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            CellStyle headerStyle = ExcelUtil.headersStyle(workbook);
+            CellStyle rowStyle = ExcelUtil.rowsStyle(workbook);
+
+            Sheet sheet = workbook.createSheet("Libros");
+            sheet.setDefaultColumnWidth(20);
+
+
+            Row cabecera = sheet.createRow(0);
+
+            Cell cellHeader = cabecera.createCell(0);
+            cellHeader.setCellValue("Reporte de ventas");
+
+            Row row = sheet.createRow(1);
+
+            for (int i = 0; i < headers.length; i++) {
+                Cell cell = row.createCell(i);
+                cell.setCellValue(headers[i]);
+                cell.setCellStyle(headerStyle);
+            }
+
+            int initRow = 2;
+            for (LibroJPA p : list()) {
+                row = sheet.createRow(initRow);
+                row.setHeightInPoints((2 * sheet.getDefaultRowHeightInPoints()));
+
+                ExcelUtil.createIntegerCell(p.getLibroId(), row, 0, rowStyle);
+                ExcelUtil.createStringCell(p.getNombre(), row, 1, rowStyle);
+                ExcelUtil.createStringCell(p.getDescripcion(), row, 2, rowStyle);
+                ExcelUtil.createStringCell(p.getCategoria().getNombre(), row, 3, rowStyle);
+                ExcelUtil.createIntegerCell(p.getPaginas(), row, 4, rowStyle);
+                ExcelUtil.createStringCell(p.getAutor().getNombre(), row, 5, rowStyle);
+                ExcelUtil.createStringCell(p.getEditorial().getNombre(), row, 6, rowStyle);
+
+                ExcelUtil.createStringCell(p.getPrecio(), row, 7, rowStyle);
+
 
                 row.setRowStyle(rowStyle);
                 initRow++;
