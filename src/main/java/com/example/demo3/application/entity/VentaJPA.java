@@ -2,6 +2,7 @@ package com.example.demo3.application.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "venta")
@@ -21,7 +22,7 @@ public class VentaJPA {
     private LibroJPA libro;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private Date fecha;
 
     public Integer getVentaId() {
         return ventaId;
@@ -47,11 +48,11 @@ public class VentaJPA {
         this.libro = libro;
     }
 
-    public LocalDateTime getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 }
