@@ -100,17 +100,17 @@ public class LibroServiceJPA implements ILibroServiceJPA {
                 ExcelUtil.createIntegerCell(p.getId(), row, 0, rowStyle);
                 ExcelUtil.createStringCell(p.getComprador(), row, 1, rowStyle);
                 ExcelUtil.createStringCell(p.getDni(), row, 2, rowStyle);
-                if (p.getFecha() != null) {
+                /*if (p.getFecha() != null) {
                     ExcelUtil.createStringCell(p.getFecha().toString(), row, 3, rowStyle);
-                }
-                ExcelUtil.createStringCell(p.getNombrelibro(), row, 4, rowStyle);
-                ExcelUtil.createStringCell(p.getDescripcion(), row, 5, rowStyle);
-                ExcelUtil.createStringCell(p.getCategoria(), row, 6, rowStyle);
-                ExcelUtil.createIntegerCell(p.getPaginas(), row, 7, rowStyle);
-                ExcelUtil.createStringCell(p.getAutor(), row, 8, rowStyle);
-                ExcelUtil.createStringCell(p.getEditorial(), row, 9, rowStyle);
-                ExcelUtil.createIntegerCell(p.getAnio(), row, 10, rowStyle);
-                ExcelUtil.createStringCell(p.getPrecio(), row, 11, rowStyle);
+                }*/
+                ExcelUtil.createStringCell(p.getNombrelibro(), row, 3, rowStyle);
+                ExcelUtil.createStringCell(p.getDescripcion(), row, 4, rowStyle);
+                ExcelUtil.createStringCell(p.getCategoria(), row, 5, rowStyle);
+                ExcelUtil.createIntegerCell(p.getPaginas(), row, 6, rowStyle);
+                ExcelUtil.createStringCell(p.getAutor(), row, 7, rowStyle);
+                ExcelUtil.createStringCell(p.getEditorial(), row, 8, rowStyle);
+                ExcelUtil.createIntegerCell(p.getAnio(), row, 9, rowStyle);
+                ExcelUtil.createStringCell(p.getPrecio(), row, 10, rowStyle);
 
                 row.setRowStyle(rowStyle);
                 initRow++;
